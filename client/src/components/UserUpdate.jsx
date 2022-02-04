@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import api from "../api/api";
-
-export default function UserRegister() {
+export default function UserUpdate() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,16 +17,19 @@ export default function UserRegister() {
     console.log(event.target.value);
     setPassword(event.target.value);
   };
-  const handleCreate = async (event) => {
-    const newItem = {
+  const handleUpdate = async (event) => {
+    const user = {
       name,
       email,
       password,
-      isActive: true,
     };
-    console.log(newItem);
-    //newItem - is req.body
-    await api.post("/users", newItem);
+    console.log(user);
+    try {
+      await api.put("/users/me", user);
+      console.log("posted");
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
@@ -41,8 +43,8 @@ export default function UserRegister() {
         placeholder="password"
         onChange={onPasswordChange}
       />
-      <button className="create-btn" onClick={handleCreate}>
-        register new user
+      <button className="create-btn" onClick={handleUpdate}>
+        login
       </button>
     </>
   );

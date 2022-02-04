@@ -16,6 +16,10 @@ export default function HomePage() {
       <Link to="/users" className="home-link">
         get user list
       </Link>
+      <br />
+      <Link to="/update" className="home-link">
+        update user
+      </Link>
     </div>
   );
 }

@@ -58,7 +58,7 @@ const deleteAllUsers = async (req, res) => {
 
 const updateUser = async (req, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["name", "isActive", "password"];
+  const allowedUpdates = ["name", "email", "password"];
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)
   );
@@ -68,6 +68,8 @@ const updateUser = async (req, res) => {
 
   try {
     updates.forEach((update) => (req.user[update] = req.body[update]));
+    console.log(req.user);
+    console.log(req.user[update]);
     //included save to hash passwords on update
     await req.user.save();
     res.send(req.user);
@@ -77,8 +79,14 @@ const updateUser = async (req, res) => {
 };
 const loginUser = async (req, res) => {
   try {
-    const user = await User.findByCredentials(req.body.name, req.body.password);
+    console.log("genering user");
+    const user = await User.findByCredentials(
+      req.body.email,
+      req.body.password
+    );
     const token = await user.generateAuthToken();
+    console.log(user);
+
     res.send({ user, token });
   } catch (e) {
     res.status(400).send();
