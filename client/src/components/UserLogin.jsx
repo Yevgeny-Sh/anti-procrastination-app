@@ -9,15 +9,14 @@ export default function UserLogin() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
+  //const [token, setToken] = useState("");
   const [wrongCred, setWrongCred] = useState(false);
+  const [error, setError] = useState("");
 
   const onEmailChange = (event) => {
-    console.log(event.target.value);
     setEmail(event.target.value);
   };
   const onPasswordChange = (event) => {
-    console.log(event.target.value);
     setPassword(event.target.value);
   };
   const setTokenInStorage = (userToken) => {
@@ -29,11 +28,9 @@ export default function UserLogin() {
       email,
       password,
     };
-    console.log(user);
-
     try {
       const { data } = await api.post("/users/login", user);
-      setToken(data.token);
+      //setToken(data.token);
       setTokenInStorage(data.token);
       //go to another page
       //but check token before u let log in
@@ -43,11 +40,8 @@ export default function UserLogin() {
 
       history.push(path);
     } catch (error) {
-      console.log(error);
-
-      console.log("bbb");
+      setError(error);
       setWrongCred(!wrongCred);
-      console.log(wrongCred);
       //let path = `/login`;
 
       //history.push(path);
@@ -66,6 +60,7 @@ export default function UserLogin() {
       <button className="create-btn" onClick={handleLogin}>
         login
       </button>
+      {error ? <div className="errorMsg">{error}</div> : <div></div>}
       {wrongCred ? (
         <div className="wrongCred">wrong email or password, try again!</div>
       ) : (
