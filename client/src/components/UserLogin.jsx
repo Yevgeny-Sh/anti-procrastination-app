@@ -30,18 +30,21 @@ export default function UserLogin() {
     };
     try {
       const { data } = await api.post("/users/login", user);
-      //setToken(data.token);
-      setTokenInStorage(data.token);
-      //go to another page
-      //but check token before u let log in
-      //await api.get("/users/me", user);
+      if (data) {
+        //setToken(data.token);
+        setTokenInStorage(data.token);
+        //go to another page
+        //but check token before u let log in
+        //await api.get("/users/me", user);
 
-      let path = `/login/me`;
+        let path = `/login/me`;
 
-      history.push(path);
+        history.push(path);
+      }
     } catch (error) {
       setError(error);
       setWrongCred(!wrongCred);
+      console.log(error);
       //let path = `/login`;
 
       //history.push(path);
