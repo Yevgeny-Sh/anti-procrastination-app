@@ -9,7 +9,8 @@ export default function UserLogin() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //const [token, setToken] = useState("");
+  //const [name, setName] = useState("");
+
   const [errorMsg, setErrorMsg] = useState("");
 
   const onEmailChange = (event) => {
@@ -32,8 +33,13 @@ export default function UserLogin() {
       if (res.data) {
         //setToken(data.token);
         setTokenInStorage(res.data.token);
+        let currUser = res.data.user;
         let path = `/login/me`;
-        history.push(path);
+        //history.push(path);
+        history.push({
+          pathname: path,
+          state: { currUser },
+        });
       }
     } catch (error) {
       setErrorMsg(error.response.data.error);
