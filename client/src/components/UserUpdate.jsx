@@ -6,15 +6,12 @@ export default function UserUpdate() {
   const [password, setPassword] = useState("");
 
   const onNameChange = (event) => {
-    console.log(event.target.value);
     setName(event.target.value);
   };
   const onEmailChange = (event) => {
-    console.log(event.target.value);
     setEmail(event.target.value);
   };
   const onPasswordChange = (event) => {
-    console.log(event.target.value);
     setPassword(event.target.value);
   };
   const handleUpdate = async (event) => {
@@ -23,7 +20,6 @@ export default function UserUpdate() {
       email,
       password,
     };
-    console.log(user);
     try {
       await api.put("/users/me", user);
       console.log("posted");

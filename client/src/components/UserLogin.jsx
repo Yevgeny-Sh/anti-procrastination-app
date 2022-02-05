@@ -10,8 +10,7 @@ export default function UserLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   //const [token, setToken] = useState("");
-  const [wrongCred, setWrongCred] = useState(false);
-  const [error, setError] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const onEmailChange = (event) => {
     setEmail(event.target.value);
@@ -29,25 +28,15 @@ export default function UserLogin() {
       password,
     };
     try {
-      const { data } = await api.post("/users/login", user);
-      if (data) {
+      const res = await api.post("/users/login", user);
+      if (res.data) {
         //setToken(data.token);
-        setTokenInStorage(data.token);
-        //go to another page
-        //but check token before u let log in
-        //await api.get("/users/me", user);
-
+        setTokenInStorage(res.data.token);
         let path = `/login/me`;
-
         history.push(path);
       }
     } catch (error) {
-      setError(error);
-      setWrongCred(!wrongCred);
-      console.log(error);
-      //let path = `/login`;
-
-      //history.push(path);
+      setErrorMsg(error.response.data.error);
     }
   };
   return (
@@ -63,9 +52,8 @@ export default function UserLogin() {
       <button className="create-btn" onClick={handleLogin}>
         login
       </button>
-      {error ? <div className="errorMsg">{error}</div> : <div></div>}
-      {wrongCred ? (
-        <div className="wrongCred">wrong email or password, try again!</div>
+      {errorMsg ? (
+        <div className="errorMsg">error:{errorMsg}</div>
       ) : (
         <div></div>
       )}

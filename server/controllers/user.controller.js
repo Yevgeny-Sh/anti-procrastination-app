@@ -68,8 +68,8 @@ const updateUser = async (req, res) => {
 
   try {
     updates.forEach((update) => (req.user[update] = req.body[update]));
-    console.log(req.user);
-    console.log(req.user[update]);
+    //console.log(req.user);
+    //console.log(req.user[update]);
     //included save to hash passwords on update
     await req.user.save();
     res.send(req.user);
@@ -79,17 +79,19 @@ const updateUser = async (req, res) => {
 };
 const loginUser = async (req, res) => {
   try {
-    console.log("genering user");
     const user = await User.findByCredentials(
       req.body.email,
       req.body.password
     );
     const token = await user.generateAuthToken();
-    console.log(user);
-
     res.send({ user, token });
+    if (user === undefined) {
+      console.log("no user");
+      res.send({});
+    }
   } catch (e) {
-    res.status(400).send();
+    //notice the change in this err send
+    res.status(400).send({ error: e.message });
   }
 };
 const logOutUser = async (req, res) => {
