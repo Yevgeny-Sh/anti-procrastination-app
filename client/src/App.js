@@ -19,9 +19,9 @@ function App() {
           <Switch>
             <Route path="/" exact component={HomePage} />
             <Route path="/register" exact component={UserRegister} />
+            <Route path="/login" exact component={UserLogin} />
 
             <Route path="/login/me" exact component={LoggedUser} />
-            <Route path="/login" exact component={UserLogin} />
 
             <Route path="/update" exact component={UserUpdate} />
             <Route path="/users" exact component={UsersList} />
