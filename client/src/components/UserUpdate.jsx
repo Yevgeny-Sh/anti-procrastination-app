@@ -4,6 +4,7 @@ export default function UserUpdate() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isPosted, setIsPosted] = useState(false);
 
   const onNameChange = (event) => {
     setName(event.target.value);
@@ -32,8 +33,9 @@ export default function UserUpdate() {
         },
       };
       const response = await api.put("/users/me", user, requestOptions);
-      //await api.put("/users/me", user);
-      console.log("posted");
+      if (response) {
+        setIsPosted(true);
+      }
     } catch (error) {
       console.log(error.response);
     }
@@ -54,6 +56,11 @@ export default function UserUpdate() {
       <button className="create-btn" onClick={handleUpdate}>
         login
       </button>
+      {isPosted ? (
+        <div className="posted">credentials updated</div>
+      ) : (
+        <div></div>
+      )}
     </>
   );
 }
