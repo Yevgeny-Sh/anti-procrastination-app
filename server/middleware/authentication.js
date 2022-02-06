@@ -5,8 +5,8 @@ const User = require("../models/user.model");
 const auth = async (req, res, next) => {
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
-
     const decoded = jwt.verify(token, "hello");
+    console.log(token);
     //decoded now contains user
     //the second arg is a string called - "secret"
     //TODO should be stored as a env variable, hidden in the config folder

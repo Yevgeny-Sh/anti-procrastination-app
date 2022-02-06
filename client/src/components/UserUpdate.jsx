@@ -14,19 +14,31 @@ export default function UserUpdate() {
   const onPasswordChange = (event) => {
     setPassword(event.target.value);
   };
-  const handleUpdate = async (event) => {
+  const handleUpdate = async () => {
     const user = {
       name,
       email,
       password,
     };
     try {
-      await api.put("/users/me", user);
+      const token = JSON.parse(sessionStorage.getItem("token"));
+      console.log(token);
+      const requestOptions = {
+        method: "PUT",
+        //token
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
+      const response = await api.put("/users/me", user, requestOptions);
+      //await api.put("/users/me", user);
       console.log("posted");
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
     }
   };
+
   return (
     <>
       <div>name: {name}</div>

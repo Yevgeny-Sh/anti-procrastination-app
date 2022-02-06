@@ -65,7 +65,6 @@ const updateUser = async (req, res) => {
   if (!isValidOperation) {
     return res.status(400).send("Invalid parameters for update");
   }
-
   try {
     updates.forEach((update) => (req.user[update] = req.body[update]));
     //console.log(req.user);

@@ -2,28 +2,22 @@ const express = require("express");
 
 const cors = require("cors");
 const path = require("path");
-const router = require("../server/routes/user.route");
+const userRouter = require("../server/routes/user.route");
+const taskRouter = require("../server/routes/task.route");
 
 const app = express();
+
+//const cors=
 
 const port = process.env.PORT || 5000;
 
 const publicPath = path.join(__dirname, "build");
-//app.use(cors());
-//to prevent cors issue on development env (instead of cors())
-//to not be used on actual production env outside Heroku
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,POST,PUT,PATCH,DELETE,OPTIONS"
-  );
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  next();
-});
+app.use(cors());
+
 app.use(express.json());
 
-app.use(router);
+app.use(userRouter);
+app.use(taskRouter);
 
 app.use(express.static(publicPath));
 
