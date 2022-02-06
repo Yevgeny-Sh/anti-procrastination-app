@@ -13,13 +13,13 @@ export default function HomePage() {
         login
       </Link>
       <br />
-      <Link to="/users" className="home-link">
+      {/* <Link to="/users" className="home-link">
         get user list
       </Link>
       <br />
       <Link to="/update" className="home-link">
         update user
-      </Link>
+      </Link> */}
     </div>
   );
 }

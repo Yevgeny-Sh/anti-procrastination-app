@@ -42,7 +42,7 @@ export default function UserLogin() {
         });
       }
     } catch (error) {
-      setErrorMsg(error.response.data.error);
+      setErrorMsg(error.response);
     }
   };
   return (

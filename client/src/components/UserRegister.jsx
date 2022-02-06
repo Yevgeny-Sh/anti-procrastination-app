@@ -25,9 +25,12 @@ export default function UserRegister() {
       password,
       isActive: true,
     };
-    console.log(newItem);
     //newItem - is req.body
-    await api.post("/users", newItem);
+    try {
+      await api.post("/users", newItem);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>

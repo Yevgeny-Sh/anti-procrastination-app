@@ -9,6 +9,8 @@ import UserLogin from "./components/UserLogin";
 import UserUpdate from "./components/UserUpdate";
 import UsersList from "./components/UsersList";
 import LoggedUser from "./components/LoggedUser";
+import UsersTasks from "./components/UsersTasks";
+import CreateTask from "./components/CreateTask";
 
 //import NotFound from "./NotFound";
 function App() {
@@ -25,6 +27,8 @@ function App() {
 
             <Route path="/update" exact component={UserUpdate} />
             <Route path="/users" exact component={UsersList} />
+            <Route path="/tasks" exact component={UsersTasks} />
+            <Route path="/new-tasks" exact component={CreateTask} />
 
             {/* <Route component={NotFound} /> */}
           </Switch>
