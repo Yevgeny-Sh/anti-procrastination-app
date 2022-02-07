@@ -22,11 +22,12 @@ router.post("/api/tasks", auth, async (req, res) => {
 router.get("/api/tasks", auth, async (req, res) => {
   try {
     //replaces user.tasks with an actual tasks document
+    console.log(req.user);
     await req.user.populate("tasks").execPopulate();
     res.send(req.user.tasks);
     //res.send("thid is tasks");
   } catch (e) {
-    res.status(500).send();
+    res.status(501).send("err");
   }
 });
 

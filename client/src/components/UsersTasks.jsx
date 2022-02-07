@@ -23,7 +23,7 @@ export default function UsersTasks() {
         setData(res);
       } else console.log(res);
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
     }
   };
   useEffect(() => {
