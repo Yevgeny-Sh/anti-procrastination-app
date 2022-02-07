@@ -1,19 +1,19 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+
 import api from "../api/api";
 
 export default function CreateTask() {
   //import { Link } from "react-router-dom";
-  //import { useHistory } from "react-router-dom";
 
-  //const history = useHistory();
+  const history = useHistory();
 
   const [description, setDescription] = useState("");
   const [importance, setImportance] = useState(1);
-
   const [urgency, setUrgency] = useState(1);
   const [willingness, setWillingness] = useState(1);
   const [reason, setReason] = useState("");
-  //const [owner, setOwner] = useState("");
+  const [isCreated, setIsCreated] = useState(false);
 
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -41,21 +41,20 @@ export default function CreateTask() {
       willingness,
       reason,
     };
-    console.log(task);
+    const token = JSON.parse(sessionStorage.getItem("token"));
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    };
     try {
-      const res = await api.post("/tasks", task);
-      console.log(res);
-      //   if (res.data) {
-      //setToken(data.token);
-      //setTokenInStorage(res.data.token);
-      //  let currUser = res.data.user;
-      //  let path = `/login/me`;
-      //history.push(path);
-      // history.push({
-      //   pathname: path,
-      //   state: { currUser },
-      // });
-      //  }
+      const res = await api.post("/tasks", task, requestOptions);
+      if (res.data) {
+        setIsCreated(true);
+      }
     } catch (error) {
       setErrorMsg(error.response);
     }
@@ -89,6 +88,16 @@ export default function CreateTask() {
       </button>
       {errorMsg ? (
         <div className="errorMsg">error:{errorMsg}</div>
+      ) : (
+        <div></div>
+      )}
+      {isCreated ? (
+        <div className="isCreated">
+          new task created!
+          <button className="button icon-left" onClick={history.goBack}>
+            Back
+          </button>
+        </div>
       ) : (
         <div></div>
       )}

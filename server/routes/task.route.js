@@ -8,7 +8,6 @@ router.post("/api/tasks", auth, async (req, res) => {
   const task = new Task({
     ...req.body,
     owner: req.user._id,
-    // owner: req.user._id,
   });
 
   try {
