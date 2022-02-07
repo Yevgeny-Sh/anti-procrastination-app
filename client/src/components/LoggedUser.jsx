@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function LoggedUser(props) {
-  //console.log(props);
   return (
     <div>
       <div>hello:{props.location.state.currUser.name}</div>
@@ -19,7 +18,6 @@ export default function LoggedUser(props) {
         create new task{"    "}
         <br />
       </Link>
-      <div>create new task:</div>
     </div>
   );
 }

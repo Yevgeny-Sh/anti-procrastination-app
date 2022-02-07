@@ -42,7 +42,8 @@ export default function UserLogin() {
         });
       }
     } catch (error) {
-      setErrorMsg(error.response);
+      console.log(error);
+      setErrorMsg(error.response.data.error);
     }
   };
   return (
