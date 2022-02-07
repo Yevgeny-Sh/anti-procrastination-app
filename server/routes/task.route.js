@@ -19,18 +19,19 @@ router.post("/api/tasks", auth, async (req, res) => {
 });
 
 //get all users tasks
-router.get("/tasks", auth, async (req, res) => {
+router.get("/api/tasks", auth, async (req, res) => {
   try {
     //replaces user.tasks with an actual tasks document
     await req.user.populate("tasks").execPopulate();
     res.send(req.user.tasks);
+    //res.send("thid is tasks");
   } catch (e) {
     res.status(500).send();
   }
 });
 
 //get a users task by id
-router.get("/tasks/:id", auth, async (req, res) => {
+router.get("/api/tasks/:id", auth, async (req, res) => {
   const _id = req.params.id;
 
   try {
@@ -47,7 +48,7 @@ router.get("/tasks/:id", auth, async (req, res) => {
 });
 
 //update a task
-router.patch("/tasks/:id", auth, async (req, res) => {
+router.patch("/api/tasks/:id", auth, async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = ["description", "completed"];
   const isValidOperation = updates.every((update) =>
@@ -77,7 +78,7 @@ router.patch("/tasks/:id", auth, async (req, res) => {
 });
 
 //delete a task by id
-router.delete("/tasks/:id", auth, async (req, res) => {
+router.delete("/api/tasks/:id", auth, async (req, res) => {
   try {
     const task = await Task.findOneAndDelete({
       _id: req.params.id,
