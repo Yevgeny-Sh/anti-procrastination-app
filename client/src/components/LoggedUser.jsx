@@ -11,6 +11,10 @@ export default function LoggedUser(props) {
         my tasks{"    "}
         <br />
       </Link>
+      <Link to="/update" className="home-link ">
+        update credentials{"    "}
+        <br />
+      </Link>
       <Link to="/new-tasks" className="home-link ">
         create new task{"    "}
         <br />

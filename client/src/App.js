@@ -24,7 +24,6 @@ function App() {
             <Route path="/login" exact component={UserLogin} />
 
             <Route path="/login/me" exact component={LoggedUser} />
-
             <Route path="/update" exact component={UserUpdate} />
             <Route path="/users" exact component={UsersList} />
             <Route path="/tasks" exact component={UsersTasks} />
