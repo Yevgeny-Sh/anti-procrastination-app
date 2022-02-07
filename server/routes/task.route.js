@@ -4,9 +4,10 @@ const auth = require("../middleware/authentication");
 const router = new express.Router();
 
 //new task for a specific user
-router.post("/api/tasks", async (req, res) => {
+router.post("/api/tasks", auth, async (req, res) => {
   const task = new Task({
     ...req.body,
+    owner: req.user._id,
     // owner: req.user._id,
   });
 
