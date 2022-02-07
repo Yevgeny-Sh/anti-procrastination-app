@@ -24,10 +24,7 @@ router.get("/api/tasks", auth, async (req, res) => {
     //replaces user.tasks with an actual tasks document
     await req.user.populate("tasks");
     //.execPopulate();
-    console.log(req.user); //nope
-
     res.send(req.user.tasks);
-    //res.send("thid is tasks");
   } catch (e) {
     res.send(JSON.stringify(e, ["message", "arguments", "type", "name"]));
   }

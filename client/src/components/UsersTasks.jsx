@@ -19,9 +19,9 @@ export default function UsersTasks() {
       const res = await api.get("/tasks", requestOptions);
       if (res.data) {
         setIsLoading(false);
-        console.log(res);
-        setData(res);
-      } else console.log(res);
+        console.log(res.data);
+        setData(res.data[0].description);
+      }
     } catch (error) {
       console.log(error.response);
     }
@@ -34,12 +34,12 @@ export default function UsersTasks() {
       {loading ? (
         <div className="loading">
           loading!
-          <button
+          {/* <button
             className="button icon-left"
-            onClick={console.log("history.goBack")}
+            onClick={}
           >
             Back
-          </button>
+          </button> */}
         </div>
       ) : (
         <div>
