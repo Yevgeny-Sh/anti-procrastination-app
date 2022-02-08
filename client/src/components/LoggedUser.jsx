@@ -1,11 +1,11 @@
 import React from "react";
-//import { Link, useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 import api from "../api/api";
 
 export default function LoggedUser(props) {
-  //const history = useHistory();
+  const history = useHistory();
   const handleLogOut = async () => {
     const token = JSON.parse(sessionStorage.getItem("token"));
     console.log(token);
@@ -18,10 +18,12 @@ export default function LoggedUser(props) {
     };
 
     try {
+      //https://procrastination-app.herokuapp.com/login/api/users/logout
+      //fails at heroku
       const res = await api.post("/users/logout", {}, requestOptions);
       if (res) {
         console.log(`logged out`);
-        // history.goBack(); //sseem to couse trouble with heroku
+        history.goBack();
       }
     } catch (error) {
       console.log(error);
