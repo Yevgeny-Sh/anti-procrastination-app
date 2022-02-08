@@ -103,6 +103,7 @@ const logOutUser = async (req, res) => {
     await req.user.save();
     res.send("user logged out");
   } catch (e) {
+    console.log(e);
     res.status(500).send();
   }
 };

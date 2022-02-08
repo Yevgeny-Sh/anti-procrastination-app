@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
 
-//!the auth tokens are sent in the header
+// //!the auth tokens are sent in the header
 const auth = async (req, res, next) => {
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
@@ -20,6 +20,8 @@ const auth = async (req, res, next) => {
     req.token = token;
     next();
   } catch (e) {
+    //better to log every error..
+    console.log(e);
     res.status(401).send({ error: "Please authenticate." });
   }
 };

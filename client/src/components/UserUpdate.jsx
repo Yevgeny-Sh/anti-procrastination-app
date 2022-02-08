@@ -53,7 +53,7 @@ export default function UserUpdate() {
         placeholder="password"
         onChange={onPasswordChange}
       />
-      <button className="create-btn" onClick={handleUpdate}>
+      <button className="button create-btn" onClick={handleUpdate}>
         login
       </button>
       {isPosted ? (

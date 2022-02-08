@@ -31,7 +31,6 @@ export default function UserLogin() {
     try {
       const res = await api.post("/users/login", user);
       if (res.data) {
-        //setToken(data.token);
         setTokenInStorage(res.data.token);
         let currUser = res.data.user;
         let path = `/login/me`;

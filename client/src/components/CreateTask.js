@@ -33,6 +33,8 @@ export default function CreateTask() {
     setReason(event.target.value);
   };
 
+  const logout = () => {};
+
   const handleCreate = async () => {
     const task = {
       description,
@@ -114,9 +116,9 @@ export default function CreateTask() {
         <div className="isCreated">
           new task created!
           <button className="button icon-left" onClick={history.goBack}>
-            Back
+            logout
           </button>
-          <button className="button icon-left" onClick={history.goBack}>
+          <button className="button icon-left" onClick={logout()}>
             Back
           </button>
         </div>

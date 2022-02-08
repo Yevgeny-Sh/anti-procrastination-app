@@ -1,11 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import api from "../api/api";
 
 export default function LoggedUser(props) {
+  const handleLogOut = async () => {
+    const token = JSON.parse(sessionStorage.getItem("token"));
+    console.log(token);
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await api.post("/users/logout", {}, requestOptions);
+      if (res) {
+        console.log(`logged out`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div>hello:{props.location.state.currUser.name}</div>
-      <button className="button logout-btn" onClick={handleUpdate}>
+      <button className="button logout-btn" onClick={() => handleLogOut()}>
         logout
       </button>
       <Link to="/tasks" className="home-link ">
