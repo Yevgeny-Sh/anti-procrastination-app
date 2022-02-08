@@ -4,6 +4,7 @@ import api from "../api/api";
 export default function UsersTasks() {
   const [loading, setIsLoading] = useState(true);
   const [tasks, setTasks] = useState([]);
+  // const [didWeDeleted, setDidWeDeleted] = useState(false);
 
   const getTasks = async () => {
     const token = JSON.parse(sessionStorage.getItem("token"));
@@ -26,9 +27,8 @@ export default function UsersTasks() {
       console.log(error.response);
     }
   };
-  useEffect(() => {
-    getTasks();
-  }, []);
+
+  //
   const renderTasks = () => {
     if (tasks) {
       const renderedResults = tasks.map((task) => {
@@ -52,10 +52,12 @@ export default function UsersTasks() {
       return renderedResults;
     }
   };
-  //
+
+  useEffect(() => {
+    getTasks();
+  }, []);
+
   const deleteTask = async (taskId) => {
-    //delete both from db
-    //ad from state
     const token = JSON.parse(sessionStorage.getItem("token"));
     const requestOptions = {
       method: "DELETE",
@@ -64,18 +66,20 @@ export default function UsersTasks() {
         "Content-Type": "application/json",
       },
     };
+    //
     let myTasks = tasks;
     if (myTasks) {
-      //const res =
       await api.delete(`/tasks/${taskId}`, requestOptions);
       const task = tasks.find((elm) => (elm._id = taskId));
-      console.log(task);
       const index = myTasks.indexOf(task);
       if (index > -1) {
-        myTasks.splice(index, 1); // 2nd parameter means remove one item only
+        myTasks.splice(index, 1);
       }
       console.log(tasks);
-      setTasks(myTasks);
+      //creates new array to force re-render
+      setTasks([...myTasks]);
+
+      console.log(tasks);
     }
   };
   return (
