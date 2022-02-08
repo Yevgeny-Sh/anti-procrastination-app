@@ -20,7 +20,6 @@ const auth = async (req, res, next) => {
     req.token = token;
     next();
   } catch (e) {
-    //better to log every error..
     console.log(e);
     res.status(401).send({ error: "Please authenticate." });
   }
