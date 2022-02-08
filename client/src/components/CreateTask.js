@@ -116,6 +116,9 @@ export default function CreateTask() {
           <button className="button icon-left" onClick={history.goBack}>
             Back
           </button>
+          <button className="button icon-left" onClick={history.goBack}>
+            Back
+          </button>
         </div>
       ) : (
         <div></div>

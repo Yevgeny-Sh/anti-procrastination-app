@@ -5,7 +5,9 @@ export default function LoggedUser(props) {
   return (
     <div>
       <div>hello:{props.location.state.currUser.name}</div>
-      <div>logout</div>
+      <button className="button logout-btn" onClick={handleUpdate}>
+        logout
+      </button>
       <Link to="/tasks" className="home-link ">
         my tasks{"    "}
         <br />

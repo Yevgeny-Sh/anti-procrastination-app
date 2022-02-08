@@ -56,7 +56,7 @@ export default function UserLogin() {
         placeholder="password"
         onChange={onPasswordChange}
       />
-      <button className="create-btn" onClick={handleLogin}>
+      <button className="login-btn" onClick={handleLogin}>
         login
       </button>
       {errorMsg ? (
