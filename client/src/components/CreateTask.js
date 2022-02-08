@@ -69,18 +69,37 @@ export default function CreateTask() {
       />
       <div>importance: </div>
       <input
+        type="range"
+        name="cowbell"
+        min="1"
+        max="10"
         value={importance}
-        placeholder="importance"
+        step="1"
         onChange={onImportanceChange}
-      />
+      ></input>
+
       <div>urgency: </div>
-      <input value={urgency} placeholder="urgency" onChange={onUrgencyChange} />
+      <input
+        type="range"
+        name="cowbell"
+        min="1"
+        max="10"
+        value={urgency}
+        step="1"
+        onChange={onUrgencyChange}
+      ></input>
+
       <div>willingness: </div>
       <input
+        type="range"
+        name="cowbell"
+        min="1"
+        max="10"
         value={willingness}
-        placeholder="urgency"
+        step="1"
         onChange={onWillingnessChange}
-      />
+      ></input>
+
       <div>reason: </div>
       <input value={reason} placeholder="reason" onChange={onReasonChange} />
       <button className="create-btn" onClick={handleCreate}>
