@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 //import { Link } from "react-router-dom";
@@ -20,7 +21,12 @@ export default function LoggedUser(props) {
     try {
       //https://procrastination-app.herokuapp.com/login/api/users/logout
       //fails at heroku
-      const res = await api.post("/users/logout", {}, requestOptions);
+      // const res = await api.post("/users/logout", {}, requestOptions);
+      const res = axios.post(
+        `https://procrastination-app.herokuapp.com/api/users/logout`,
+        {},
+        requestOptions
+      );
       if (res) {
         console.log(`logged out`);
         history.goBack();
