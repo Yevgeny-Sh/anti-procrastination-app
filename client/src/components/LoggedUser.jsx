@@ -15,6 +15,7 @@ export default function LoggedUser(props) {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
+        Referer: api,
       },
     };
 
