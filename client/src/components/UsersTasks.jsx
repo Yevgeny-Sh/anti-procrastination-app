@@ -84,7 +84,7 @@ export default function UsersTasks() {
   };
   return (
     <div className="spinner-container">
-      {!loading ? <Spin size="large" /> : <div>tasks: {renderTasks()}</div>}
+      {loading ? <Spin size="large" /> : <div>tasks: {renderTasks()}</div>}
     </div>
   );
 }
