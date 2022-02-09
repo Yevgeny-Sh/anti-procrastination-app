@@ -1,4 +1,4 @@
-.App {
+.app {
   text-align: center;
 }
 
@@ -31,6 +31,16 @@
   background: #61dafb;
 }
 
+.spinner-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 30px 50px;
+  text-align: center;
+  border-radius: 4px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

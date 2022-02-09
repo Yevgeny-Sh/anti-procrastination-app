@@ -1,7 +1,9 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
+import { Button, Card } from "antd";
 
 import api from "../api/api";
+//const { Button } = antd;
 
 export default function LoggedUser(props) {
   const history = useHistory();
@@ -57,7 +59,9 @@ export default function LoggedUser(props) {
   };
 
   return (
-    <div>
+    <Card>
+      <Button type="primary">Click me!</Button>
+
       <div>hello:{props.location.state.currUser.name}</div>
       <button className="button logout-btn" onClick={() => handleLogOut()}>
         logout
@@ -74,12 +78,13 @@ export default function LoggedUser(props) {
         create new task{"    "}
         <br />
       </Link>
-      <button
+      <Button
+        type="secondary"
         className="button logout-btn"
         onClick={() => handleDeleteAccount()}
       >
         delete account
-      </button>
-    </div>
+      </Button>
+    </Card>
   );
 }

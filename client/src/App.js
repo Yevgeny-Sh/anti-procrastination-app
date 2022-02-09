@@ -15,7 +15,7 @@ import CreateTask from "./components/CreateTask";
 //import NotFound from "./NotFound";
 function App() {
   return (
-    <div className="app-main-container">
+    <div className="app">
       <BrowserRouter>
         <div>
           <Switch>

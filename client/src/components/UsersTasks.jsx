@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-//import { useHistory } from "react-router-dom";
+import { Spin, Space } from "antd";
+
 import api from "../api/api";
 export default function UsersTasks() {
   const [loading, setIsLoading] = useState(true);
   const [tasks, setTasks] = useState([]);
-  // const [didWeDeleted, setDidWeDeleted] = useState(false);
 
   const getTasks = async () => {
     const token = JSON.parse(sessionStorage.getItem("token"));
@@ -66,7 +66,7 @@ export default function UsersTasks() {
         "Content-Type": "application/json",
       },
     };
-    //
+
     let myTasks = tasks;
     if (myTasks) {
       await api.delete(`/tasks/${taskId}`, requestOptions);
@@ -83,12 +83,8 @@ export default function UsersTasks() {
     }
   };
   return (
-    <>
-      {loading ? (
-        <div className="loading">loading!</div>
-      ) : (
-        <div>tasks: {renderTasks()}</div>
-      )}
-    </>
+    <div className="spinner-container">
+      {!loading ? <Spin size="large" /> : <div>tasks: {renderTasks()}</div>}
+    </div>
   );
 }
