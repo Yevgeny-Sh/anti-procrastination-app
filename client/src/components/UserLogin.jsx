@@ -34,11 +34,11 @@ export default function UserLogin() {
         setTokenInStorage(res.data.token);
         let currUser = res.data.user;
         let path = `/login/me`;
-        //history.push(path);
-        history.push({
-          pathname: path,
-          state: { currUser },
-        });
+        history.push(path);
+        // history.push({
+        //   pathname: path,
+        //   state: { currUser },
+        // });
       }
     } catch (error) {
       console.log(error);
