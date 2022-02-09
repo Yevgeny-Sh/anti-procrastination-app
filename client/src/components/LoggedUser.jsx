@@ -1,12 +1,12 @@
 import axios from "axios";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-//import { Link } from "react-router-dom";
 
-import api from "../api/api";
+//import api from "../api/api";
 
 export default function LoggedUser(props) {
   const history = useHistory();
+
   const handleLogOut = async () => {
     const token = JSON.parse(sessionStorage.getItem("token"));
     console.log(token);
@@ -19,8 +19,6 @@ export default function LoggedUser(props) {
     };
 
     try {
-      //https://procrastination-app.herokuapp.com/login/api/users/logout
-      //fails at heroku
       // const res = await api.post("/users/logout", {}, requestOptions);
       const res = axios.post(
         `https://procrastination-app.herokuapp.com/api/users/logout`,
@@ -29,6 +27,7 @@ export default function LoggedUser(props) {
       );
       if (res) {
         console.log(`logged out`);
+        sessionStorage.removeItem("token");
         history.goBack();
       }
     } catch (error) {
