@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 
@@ -37,9 +36,8 @@ export default function LoggedUser(props) {
   //handleDeleteAccount
   const handleDeleteAccount = async () => {
     const token = JSON.parse(sessionStorage.getItem("token"));
-    console.log(token);
     const requestOptions = {
-      method: "POST",
+      method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -47,12 +45,7 @@ export default function LoggedUser(props) {
     };
 
     try {
-      // const res = await api.post("/users/logout", {}, requestOptions);
-      const res = await axios.post(
-        `https://procrastination-app.herokuapp.com/api/users/logout`,
-        {},
-        requestOptions
-      );
+      const res = await api.delete("/users/me", requestOptions);
       if (res) {
         console.log(`account deleted`);
         sessionStorage.removeItem("token");

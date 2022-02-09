@@ -34,8 +34,6 @@ export default function UserLogin() {
         setTokenInStorage(res.data.token);
         let currUser = res.data.user;
         let path = `/log`;
-        //history.push(path);
-        // return <Link to={path}></Link>;
         history.push({
           pathname: path,
           state: { currUser },
