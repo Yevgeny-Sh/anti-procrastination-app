@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Spin } from "antd";
+import { Spin, Card } from "antd";
 
 import api from "../api/api";
 export default function UsersTasks() {
@@ -33,7 +33,7 @@ export default function UsersTasks() {
     if (tasks) {
       const renderedResults = tasks.map((task) => {
         return (
-          <div className="task-card" key={task._id}>
+          <Card className="task-card" key={task._id}>
             <p> description:{task.description}</p>
             <p> importance:{task.importance}</p>
             <p> urgency:{task.urgency}</p>
@@ -46,7 +46,7 @@ export default function UsersTasks() {
             >
               completed
             </button>
-          </div>
+          </Card>
         );
       });
       return renderedResults;
@@ -78,8 +78,19 @@ export default function UsersTasks() {
       console.log(tasks);
       //creates new array to force re-render
       setTasks([...myTasks]);
-
-      console.log(tasks);
+    }
+  };
+  const completeTask = async (taskId) => {
+    let myTasks = tasks;
+    if (myTasks) {
+      const task = tasks.find((elm) => (elm._id = taskId));
+      const index = myTasks.indexOf(task);
+      if (index > -1) {
+        //myTasks.splice(index, 1);
+        //mark completed
+      }
+      //creates new array to force re-render
+      setTasks([...myTasks]);
     }
   };
   return (

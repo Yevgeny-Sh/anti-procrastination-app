@@ -6,6 +6,10 @@ const Task = mongoose.model("Task", {
     required: true,
     trim: true, //removes white space
   },
+  category: {
+    type: String,
+    required: true,
+  },
   importance: {
     type: Number,
     required: true,
