@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 //import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { Input, Card, Button } from "antd";
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
 import api from "../api/api";
 
@@ -45,23 +47,33 @@ export default function UserLogin() {
     }
   };
   return (
-    <>
-      <div>email: {email}</div>
-      <input value={email} placeholder="email" onChange={onEmailChange} />
-      <div>password: {password}</div>
-      <input
-        value={password}
+    <Card>
+      <Input
+        value={email}
+        className="input email-input"
+        size="medium"
+        placeholder="email"
+        onChange={onEmailChange}
+      />
+      <br></br>
+      <Input.Password
+        className="input password-input"
+        size="medium"
         placeholder="password"
+        iconRender={(visible) =>
+          visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+        }
         onChange={onPasswordChange}
       />
-      <button className="login-btn" onClick={handleLogin}>
+      <br></br>
+      <Button type="primary" className="login-btn" onClick={handleLogin}>
         login
-      </button>
+      </Button>
       {errorMsg ? (
         <div className="errorMsg">error:{errorMsg}</div>
       ) : (
         <div></div>
       )}
-    </>
+    </Card>
   );
 }

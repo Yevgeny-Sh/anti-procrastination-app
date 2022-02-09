@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Input, Button } from "antd";
+
 import api from "../api/api";
 
 export default function UserRegister() {
@@ -25,7 +27,6 @@ export default function UserRegister() {
       password,
       isActive: true,
     };
-    //newItem - is req.body
     try {
       await api.post("/users", newItem);
     } catch (error) {
@@ -35,18 +36,34 @@ export default function UserRegister() {
   return (
     <>
       <div>name: {name}</div>
-      <input value={name} placeholder="name" onChange={onNameChange} />
+      <Input
+        className="input"
+        value={name}
+        placeholder="name"
+        onChange={onNameChange}
+      />
       <div>email: {email}</div>
-      <input value={email} placeholder="email" onChange={onEmailChange} />
+      <Input
+        className="input"
+        value={email}
+        placeholder="email"
+        onChange={onEmailChange}
+      />
       <div>password: {password}</div>
-      <input
+      <Input
+        className="input"
         value={password}
         placeholder="password"
         onChange={onPasswordChange}
       />
-      <button className="create-btn" onClick={handleCreate}>
+      <br />
+      <Button
+        type="primary"
+        className="create-btn input"
+        onClick={handleCreate}
+      >
         register new user
-      </button>
+      </Button>
     </>
   );
 }

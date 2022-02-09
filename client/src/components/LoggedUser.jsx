@@ -3,7 +3,6 @@ import { Link, useHistory } from "react-router-dom";
 import { Button, Card } from "antd";
 
 import api from "../api/api";
-//const { Button } = antd;
 
 export default function LoggedUser(props) {
   const history = useHistory();
@@ -21,11 +20,6 @@ export default function LoggedUser(props) {
 
     try {
       const res = await api.post("/users/logout", {}, requestOptions);
-      // const res = await axios.post(
-      //   `https://procrastination-app.herokuapp.com/api/users/logout`,
-      //   {},
-      //   requestOptions
-      // );
       if (res) {
         console.log(`logged out`);
         sessionStorage.removeItem("token");
@@ -60,12 +54,15 @@ export default function LoggedUser(props) {
 
   return (
     <Card>
-      <Button type="primary">Click me!</Button>
-
       <div>hello:{props.location.state.currUser.name}</div>
-      <button className="button logout-btn" onClick={() => handleLogOut()}>
+      <Button
+        type="secondary"
+        className="button logout-btn"
+        onClick={() => handleLogOut()}
+      >
         logout
-      </button>
+      </Button>
+      <br />
       <Link to="/tasks" className="home-link ">
         my tasks{"    "}
         <br />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Spin, Space } from "antd";
+import { Spin } from "antd";
 
 import api from "../api/api";
 export default function UsersTasks() {
