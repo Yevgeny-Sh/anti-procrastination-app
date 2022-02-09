@@ -20,7 +20,7 @@ export default function LoggedUser(props) {
 
     try {
       // const res = await api.post("/users/logout", {}, requestOptions);
-      const res = axios.post(
+      const res = await axios.post(
         `https://procrastination-app.herokuapp.com/api/users/logout`,
         {},
         requestOptions
