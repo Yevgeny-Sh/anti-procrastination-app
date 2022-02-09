@@ -1,11 +1,11 @@
+//import * as React from "react";
+//import ReactDOM from "react-dom";
+//import Button from "@mui/material/Button";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-
 import api from "../api/api";
 
 export default function CreateTask() {
-  //import { Link } from "react-router-dom";
-
   const history = useHistory();
 
   const [description, setDescription] = useState("");
@@ -33,8 +33,6 @@ export default function CreateTask() {
     setReason(event.target.value);
   };
 
-  const logout = () => {};
-
   const handleCreate = async () => {
     const task = {
       description,
@@ -58,7 +56,8 @@ export default function CreateTask() {
         setIsCreated(true);
       }
     } catch (error) {
-      setErrorMsg(error.response);
+      console.dir(error);
+      setErrorMsg(error.response.data.message.slice(42));
     }
   };
   return (
@@ -116,10 +115,7 @@ export default function CreateTask() {
         <div className="isCreated">
           new task created!
           <button className="button icon-left" onClick={history.goBack}>
-            logout
-          </button>
-          <button className="button icon-left" onClick={logout()}>
-            Back
+            go back
           </button>
         </div>
       ) : (
