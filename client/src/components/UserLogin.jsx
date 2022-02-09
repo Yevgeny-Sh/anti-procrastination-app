@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 //import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import api from "../api/api";
 
@@ -33,8 +33,9 @@ export default function UserLogin() {
       if (res.data) {
         setTokenInStorage(res.data.token);
         let currUser = res.data.user;
-        let path = `/login/me`;
+        let path = `/log`;
         history.push(path);
+        // return <Link to={path}></Link>;
         // history.push({
         //   pathname: path,
         //   state: { currUser },
