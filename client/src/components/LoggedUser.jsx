@@ -2,12 +2,40 @@ import axios from "axios";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 
-//import api from "../api/api";
+import api from "../api/api";
 
 export default function LoggedUser(props) {
   const history = useHistory();
 
   const handleLogOut = async () => {
+    const token = JSON.parse(sessionStorage.getItem("token"));
+    console.log(token);
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await api.post("/users/logout", {}, requestOptions);
+      // const res = await axios.post(
+      //   `https://procrastination-app.herokuapp.com/api/users/logout`,
+      //   {},
+      //   requestOptions
+      // );
+      if (res) {
+        console.log(`logged out`);
+        sessionStorage.removeItem("token");
+        history.goBack();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //handleDeleteAccount
+  const handleDeleteAccount = async () => {
     const token = JSON.parse(sessionStorage.getItem("token"));
     console.log(token);
     const requestOptions = {
@@ -26,7 +54,7 @@ export default function LoggedUser(props) {
         requestOptions
       );
       if (res) {
-        console.log(`logged out`);
+        console.log(`account deleted`);
         sessionStorage.removeItem("token");
         history.goBack();
       }
@@ -53,6 +81,12 @@ export default function LoggedUser(props) {
         create new task{"    "}
         <br />
       </Link>
+      <button
+        className="button logout-btn"
+        onClick={() => handleDeleteAccount()}
+      >
+        delete account
+      </button>
     </div>
   );
 }
