@@ -31,6 +31,13 @@ const Task = mongoose.model("Task", {
     type: Boolean,
     default: false,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  dueDate: {
+    type: Date,
+  },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,

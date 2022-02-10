@@ -3,21 +3,23 @@
 //import Button from "@mui/material/Button";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Radio } from "antd";
-
+import { Radio, DatePicker, Button } from "antd";
 import api from "../api/api";
+//const { RangePicker } = DatePicker;
 
 export default function CreateTask() {
   const history = useHistory();
 
   const [description, setDescription] = useState("");
   const [importance, setImportance] = useState(1);
-  const [category, setCategory] = useState("");
 
   const [urgency, setUrgency] = useState(1);
   const [willingness, setWillingness] = useState(1);
   const [reason, setReason] = useState("");
   const [isCreated, setIsCreated] = useState(false);
+  const [category, setCategory] = useState("");
+
+  const [dueDate, setDueDate] = useState("");
 
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -39,6 +41,14 @@ export default function CreateTask() {
   const onCategoryChange = (event) => {
     setCategory(event.target.value);
   };
+  // const onDueDateChange = (event) => {
+  //   setDueDate(event.target.value);
+  //   console.log(dueDate);
+  // };
+  function onDueDateChange(date, dateString) {
+    console.log(dateString);
+    setDueDate(dateString);
+  }
 
   const handleCreate = async () => {
     const task = {
@@ -48,9 +58,10 @@ export default function CreateTask() {
       urgency,
       willingness,
       reason,
+      dueDate,
     };
     const token = JSON.parse(sessionStorage.getItem("token"));
-
+    console.log(task);
     const requestOptions = {
       method: "POST",
       headers: {
@@ -117,12 +128,15 @@ export default function CreateTask() {
         step="1"
         onChange={onWillingnessChange}
       ></input>
+      <br></br>
+      <DatePicker onChange={onDueDateChange} />
 
       <div>reason: </div>
       <input value={reason} placeholder="reason" onChange={onReasonChange} />
-      <button className="create-btn" onClick={handleCreate}>
+      <br></br>
+      <Button type="primary" className="create-btn" onClick={handleCreate}>
         create
-      </button>
+      </Button>
       {errorMsg ? (
         <div className="errorMsg">error:{errorMsg}</div>
       ) : (

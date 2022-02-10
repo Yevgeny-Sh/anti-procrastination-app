@@ -39,6 +39,9 @@ export default function UsersTasks() {
               <p> importance:{task.importance}</p>
               <p> urgency:{task.urgency}</p>
               <p> willingness:{task.willingness}</p>
+              <p> task created at:{task.createdAt.slice(0, -14)}</p>
+              <p> task due at :{task.dueDate.slice(0, -14)}</p>
+
               <button
                 className="button delete-task-btn"
                 onClick={() => {
