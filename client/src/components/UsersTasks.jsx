@@ -20,7 +20,6 @@ export default function UsersTasks() {
       const res = await api.get("/tasks", requestOptions);
       if (res.data) {
         setIsLoading(false);
-        console.log(res.data);
         setTasks(res.data);
       }
     } catch (error) {
@@ -32,22 +31,25 @@ export default function UsersTasks() {
   const renderTasks = () => {
     if (tasks) {
       const renderedResults = tasks.map((task) => {
-        return (
-          <Card className="task-card" key={task._id}>
-            <p> description:{task.description}</p>
-            <p> importance:{task.importance}</p>
-            <p> urgency:{task.urgency}</p>
-            <p> willingness:{task.willingness}</p>
-            <button
-              className="button delete-task-btn"
-              onClick={() => {
-                deleteTask(task._id);
-              }}
-            >
-              completed
-            </button>
-          </Card>
-        );
+        if (!task.isCompleted) {
+          return (
+            <Card className="task-card" key={task._id}>
+              <p> description:{task.description}</p>
+              <p> category:{task.category}</p>
+              <p> importance:{task.importance}</p>
+              <p> urgency:{task.urgency}</p>
+              <p> willingness:{task.willingness}</p>
+              <button
+                className="button delete-task-btn"
+                onClick={() => {
+                  deleteTask(task._id);
+                }}
+              >
+                completed
+              </button>
+            </Card>
+          );
+        }
       });
       return renderedResults;
     }
@@ -88,6 +90,7 @@ export default function UsersTasks() {
       if (index > -1) {
         //myTasks.splice(index, 1);
         //mark completed
+        task.isCompleted = true;
       }
       //creates new array to force re-render
       setTasks([...myTasks]);

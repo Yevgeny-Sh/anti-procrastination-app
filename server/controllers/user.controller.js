@@ -1,5 +1,5 @@
 require("../db/mongoose");
-const { remove } = require("../models/user.model");
+//const { remove } = require("../models/user.model");
 const User = require("../models/user.model");
 
 const getUsers = async (req, res) => {

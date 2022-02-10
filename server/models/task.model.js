@@ -27,7 +27,7 @@ const Task = mongoose.model("Task", {
     required: false,
     trim: true,
   },
-  completed: {
+  isCompleted: {
     type: Boolean,
     default: false,
   },

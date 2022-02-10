@@ -3,6 +3,8 @@
 //import Button from "@mui/material/Button";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Radio } from "antd";
+
 import api from "../api/api";
 
 export default function CreateTask() {
@@ -10,6 +12,8 @@ export default function CreateTask() {
 
   const [description, setDescription] = useState("");
   const [importance, setImportance] = useState(1);
+  const [category, setCategory] = useState("");
+
   const [urgency, setUrgency] = useState(1);
   const [willingness, setWillingness] = useState(1);
   const [reason, setReason] = useState("");
@@ -32,10 +36,14 @@ export default function CreateTask() {
   const onReasonChange = (event) => {
     setReason(event.target.value);
   };
+  const onCategoryChange = (event) => {
+    setCategory(event.target.value);
+  };
 
   const handleCreate = async () => {
     const task = {
       description,
+      category,
       importance,
       urgency,
       willingness,
@@ -68,6 +76,15 @@ export default function CreateTask() {
         placeholder="description"
         onChange={onDescriptionChange}
       />
+      <div>category: </div>
+      <Radio.Group onChange={onCategoryChange} value={category}>
+        <Radio value={"work"}>work</Radio>
+        <Radio value={"academic"}>academic</Radio>
+        <Radio value={"birocratic"}>birocratic</Radio>
+        <Radio value={"social"}>social</Radio>
+        <Radio value={"medical"}>medical</Radio>
+      </Radio.Group>
+
       <div>importance: </div>
       <input
         type="range"
