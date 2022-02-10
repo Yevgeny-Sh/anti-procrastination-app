@@ -29,11 +29,11 @@ export default function UsersTasks() {
 
   //
   const renderTasks = () => {
-    let x;
+    let nonCompletedTasks = "";
     if (tasks) {
       const renderedResults = tasks.map((task) => {
         if (!task.isCompleted) {
-          x = (
+          nonCompletedTasks = (
             <Card className="task-card" key={task._id}>
               <p> description:{task.description}</p>
               <p> category:{task.category}</p>
@@ -62,7 +62,7 @@ export default function UsersTasks() {
             </Card>
           );
         }
-        return x;
+        return nonCompletedTasks;
       });
       return renderedResults;
     }
@@ -109,7 +109,14 @@ export default function UsersTasks() {
   };
   return (
     <div className="spinner-container">
-      {loading ? <Spin size="large" /> : <div>tasks: {renderTasks()}</div>}
+      {loading ? (
+        <Spin size="large" />
+      ) : (
+        <div>
+          {" "}
+          <div>tasks:</div> {renderTasks()}
+        </div>
+      )}
     </div>
   );
 }
