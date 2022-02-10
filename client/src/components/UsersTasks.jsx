@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Spin, Card } from "antd";
+import { Spin, Card, Button } from "antd";
 
 import api from "../api/api";
 export default function UsersTasks() {
@@ -29,10 +29,11 @@ export default function UsersTasks() {
 
   //
   const renderTasks = () => {
+    let x;
     if (tasks) {
       const renderedResults = tasks.map((task) => {
         if (!task.isCompleted) {
-          return (
+          x = (
             <Card className="task-card" key={task._id}>
               <p> description:{task.description}</p>
               <p> category:{task.category}</p>
@@ -42,17 +43,26 @@ export default function UsersTasks() {
               <p> task created at:{task.createdAt.slice(0, -14)}</p>
               <p> task due at :{task.dueDate.slice(0, -14)}</p>
 
-              <button
+              <Button
+                className="button complete-task-btn"
+                onClick={() => {
+                  completeTask(task._id);
+                }}
+              >
+                completed
+              </Button>
+              <Button
                 className="button delete-task-btn"
                 onClick={() => {
                   deleteTask(task._id);
                 }}
               >
-                completed
-              </button>
+                delete task
+              </Button>
             </Card>
           );
         }
+        return x;
       });
       return renderedResults;
     }
@@ -91,8 +101,6 @@ export default function UsersTasks() {
       const task = tasks.find((elm) => (elm._id = taskId));
       const index = myTasks.indexOf(task);
       if (index > -1) {
-        //myTasks.splice(index, 1);
-        //mark completed
         task.isCompleted = true;
       }
       //creates new array to force re-render
