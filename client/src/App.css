@@ -48,6 +48,9 @@
   display: inline-flex;
   flex-direction: row;
 }
+.home-header {
+  color: white;
+}
 
 @keyframes App-logo-spin {
   from {

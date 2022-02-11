@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Spin, Card, Button } from "antd";
-
+import { Layout } from "antd";
 import api from "../api/api";
+
+const { Header, Footer, Content } = Layout;
+
 export default function UsersTasks() {
   const [loading, setIsLoading] = useState(true);
   const [tasks, setTasks] = useState([]);
@@ -151,46 +154,54 @@ export default function UsersTasks() {
       {loading ? (
         <Spin size="large" />
       ) : (
-        <div>
-          <div>tasks:</div> {renderTasks(tasks)}
-          <div>
-            <Button
-              type="secondary"
-              className="button "
-              onClick={() => sortByDueDateFunc()}
-            >
-              Display by due date{" "}
-            </Button>
-            <Button
-              type="secondary"
-              className="button "
-              onClick={() => sortByUrgancyFunc()}
-            >
-              Display by urgency{" "}
-            </Button>
-            <Button
-              type="secondary"
-              className="button "
-              onClick={() => sortByImportanceFunc()}
-            >
-              Display by importance{" "}
-            </Button>
-            <Button
-              type="secondary"
-              className="button "
-              onClick={() => sortByWillingnessFunc()}
-            >
-              Display by willingness{" "}
-            </Button>
-            <Button
-              type="secondary"
-              className="button "
-              onClick={() => sortByProcrastinationFunc()}
-            >
-              Display by procrastination time{" "}
-            </Button>
-          </div>
-        </div>
+        <Layout>
+          <Header>
+            {" "}
+            <div>
+              <Button
+                type="secondary"
+                className="button "
+                onClick={() => sortByDueDateFunc()}
+              >
+                Display by due date{" "}
+              </Button>
+              <Button
+                type="secondary"
+                className="button "
+                onClick={() => sortByUrgancyFunc()}
+              >
+                Display by urgency{" "}
+              </Button>
+              <Button
+                type="secondary"
+                className="button "
+                onClick={() => sortByImportanceFunc()}
+              >
+                Display by importance{" "}
+              </Button>
+              <Button
+                type="secondary"
+                className="button "
+                onClick={() => sortByWillingnessFunc()}
+              >
+                Display by willingness{" "}
+              </Button>
+              <Button
+                type="secondary"
+                className="button "
+                onClick={() => sortByProcrastinationFunc()}
+              >
+                Display by procrastination time{" "}
+              </Button>
+            </div>
+          </Header>
+          <Content>
+            <div>
+              <div>tasks:</div> {renderTasks(tasks)}
+            </div>
+          </Content>
+          <Footer>Footer</Footer>
+        </Layout>
       )}
     </div>
   );
