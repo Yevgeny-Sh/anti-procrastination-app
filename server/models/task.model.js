@@ -39,6 +39,11 @@ const Task = mongoose.model("Task", {
     type: Date,
     required: true,
   },
+  // procrastinationTime: {
+  //   type: Number,
+  //   required: true,
+  //   default: Date.now-dueDate,//Nan
+  // },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -47,3 +52,4 @@ const Task = mongoose.model("Task", {
 });
 
 module.exports = Task;
+//

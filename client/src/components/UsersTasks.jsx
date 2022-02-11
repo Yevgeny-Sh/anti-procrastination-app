@@ -28,7 +28,7 @@ export default function UsersTasks() {
   };
 
   //
-  const renderTasks = () => {
+  const renderTasks = (tasks) => {
     let nonCompletedTasks = "";
     if (tasks) {
       const renderedResults = tasks.map((task) => {
@@ -68,6 +68,47 @@ export default function UsersTasks() {
     }
   };
 
+  const sortByUrgancyFunc = () => {
+    let tasksArray = [...tasks];
+    tasksArray.sort(function (a, b) {
+      return parseFloat(b.urgency) - parseFloat(a.urgency);
+    });
+    setTasks([...tasksArray]); //for re render
+  };
+
+  const sortByWillingnessFunc = () => {
+    let tasksArray = [...tasks];
+    tasksArray.sort(function (a, b) {
+      return parseFloat(b.willingness) - parseFloat(a.willingness);
+      //return new Date(b.willingness) - new Date(a.date);
+    });
+    setTasks([...tasksArray]); //for re render
+  };
+
+  const sortByImportanceFunc = () => {
+    let tasksArray = [...tasks];
+    tasksArray.sort(function (a, b) {
+      return parseFloat(b.importance) - parseFloat(a.importance);
+    });
+    setTasks([...tasksArray]); //for re render
+  };
+
+  const sortByDueDateFunc = () => {
+    let tasksArray = [...tasks];
+    //
+    tasksArray.sort(function (a, b) {
+      return new Date(b.dueDate) - new Date(a.dueDate);
+    });
+
+    setTasks([...tasksArray]); //for re render
+  };
+
+  const sortByProcrastinationFunc = () => {
+    let tasksArray = [...tasks];
+    //procratination time..
+    setTasks([...tasksArray]); //for re render
+  };
+
   useEffect(() => {
     getTasks();
   }, []);
@@ -90,7 +131,6 @@ export default function UsersTasks() {
       if (index > -1) {
         myTasks.splice(index, 1);
       }
-      console.log(tasks);
       //creates new array to force re-render
       setTasks([...myTasks]);
     }
@@ -103,7 +143,6 @@ export default function UsersTasks() {
       if (index > -1) {
         task.isCompleted = true;
       }
-      //creates new array to force re-render
       setTasks([...myTasks]);
     }
   };
@@ -113,8 +152,44 @@ export default function UsersTasks() {
         <Spin size="large" />
       ) : (
         <div>
-          {" "}
-          <div>tasks:</div> {renderTasks()}
+          <div>tasks:</div> {renderTasks(tasks)}
+          <div>
+            <Button
+              type="secondary"
+              className="button "
+              onClick={() => sortByDueDateFunc()}
+            >
+              Display by due date{" "}
+            </Button>
+            <Button
+              type="secondary"
+              className="button "
+              onClick={() => sortByUrgancyFunc()}
+            >
+              Display by urgency{" "}
+            </Button>
+            <Button
+              type="secondary"
+              className="button "
+              onClick={() => sortByImportanceFunc()}
+            >
+              Display by importance{" "}
+            </Button>
+            <Button
+              type="secondary"
+              className="button "
+              onClick={() => sortByWillingnessFunc()}
+            >
+              Display by willingness{" "}
+            </Button>
+            <Button
+              type="secondary"
+              className="button "
+              onClick={() => sortByProcrastinationFunc()}
+            >
+              Display by procrastination time{" "}
+            </Button>
+          </div>
         </div>
       )}
     </div>
