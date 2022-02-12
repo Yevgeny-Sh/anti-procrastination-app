@@ -91,6 +91,7 @@ router.delete("/api/tasks/:id", auth, async (req, res) => {
 
     res.send(task);
   } catch (e) {
+    console.log(e);
     res.status(500).send();
   }
 });

@@ -3,7 +3,7 @@ import { Spin, Card, Button } from "antd";
 import { Layout } from "antd";
 import api from "../api/api";
 
-const { Header, Footer, Content } = Layout;
+const { Header, Content } = Layout;
 
 export default function UsersTasks() {
   const [loading, setIsLoading] = useState(true);
@@ -174,52 +174,48 @@ export default function UsersTasks() {
         <Spin size="large" />
       ) : (
         <Layout>
-          <Header>
-            {" "}
-            <div>
-              <Button
-                type="secondary"
-                className="button "
-                onClick={() => sortByDueDateFunc()}
-              >
-                Display by due date{" "}
-              </Button>
-              <Button
-                type="secondary"
-                className="button "
-                onClick={() => sortByUrgancyFunc()}
-              >
-                Display by urgency{" "}
-              </Button>
-              <Button
-                type="secondary"
-                className="button "
-                onClick={() => sortByImportanceFunc()}
-              >
-                Display by importance{" "}
-              </Button>
-              <Button
-                type="secondary"
-                className="button "
-                onClick={() => sortByWillingnessFunc()}
-              >
-                Display by willingness{" "}
-              </Button>
-              <Button
-                type="secondary"
-                className="button "
-                onClick={() => sortByProcrastinationFunc()}
-              >
-                Display by procrastination time{" "}
-              </Button>
-            </div>
+          <Header className="users-tasks-header">
+            <Button
+              type="secondary"
+              className="button "
+              onClick={() => sortByDueDateFunc()}
+            >
+              Display by due date{" "}
+            </Button>
+            <Button
+              type="secondary"
+              className="button "
+              onClick={() => sortByUrgancyFunc()}
+            >
+              Display by urgency{" "}
+            </Button>
+            <Button
+              type="secondary"
+              className="button "
+              onClick={() => sortByImportanceFunc()}
+            >
+              Display by importance{" "}
+            </Button>
+            <Button
+              type="secondary"
+              className="button "
+              onClick={() => sortByWillingnessFunc()}
+            >
+              Display by willingness{" "}
+            </Button>
+            <Button
+              type="secondary"
+              className="button "
+              onClick={() => sortByProcrastinationFunc()}
+            >
+              Display by procrastination time{" "}
+            </Button>
           </Header>
           <Content>
             <div>
               <div>tasks:</div> {renderTasks(tasks)}
             </div>
           </Content>
-          <Footer>Footer</Footer>
         </Layout>
       )}
     </div>

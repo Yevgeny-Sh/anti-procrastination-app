@@ -51,6 +51,13 @@
 .layout-header {
   color: white;
 }
+.users-tasks-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+/* //Button */
 
 @keyframes App-logo-spin {
   from {
