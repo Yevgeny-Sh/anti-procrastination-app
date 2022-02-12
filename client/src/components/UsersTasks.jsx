@@ -127,28 +127,30 @@ export default function UsersTasks() {
     };
 
     let myTasks = [...tasks];
-    //   if (myTasks) {
+    let nonCompletedTasks = [];
+    myTasks.forEach((element) => {
+      if (!element.isCompleted) {
+        nonCompletedTasks.push(element);
+      }
+    });
     try {
       await api.delete(`/tasks/${taskId}`, requestOptions);
     } catch (error) {
       console.log(error);
     }
-    const task = tasks.find((elm) => (elm._id = taskId));
-    const index = myTasks.indexOf(task);
-    console.log(index);
+    const task = nonCompletedTasks.find((elm) => (elm._id = taskId));
+    const index = nonCompletedTasks.indexOf(task);
     if (index > -1) {
-      console.log("fff");
-      myTasks.splice(index, 1);
+      nonCompletedTasks.splice(index, 1);
     }
-    console.log(myTasks); //not deleted
-    //creates new array to force re-render
-    // setTasks([...myTasks]);
-    myTasks = [...myTasks];
-    setTasks([...myTasks]);
-    console.log(tasks);
-    //}
+    console.log(nonCompletedTasks); // deleted
+
+    setTasks([...nonCompletedTasks]);
   };
+  //
+
   const completeTask = async (taskId) => {
+    console.log(taskId);
     const token = JSON.parse(sessionStorage.getItem("token"));
 
     const requestOptions = {
@@ -158,15 +160,17 @@ export default function UsersTasks() {
         "Content-Type": "application/json",
       },
     };
-
-    let myTasks = tasks;
-    //if (myTasks) {
+    console.log(tasks);
+    let myTasks = [...tasks];
+    console.log(myTasks);
     const task = myTasks.find((elm) => (elm._id = taskId));
+    console.log(task);
     const index = myTasks.indexOf(task);
+    console.log(index);
+
     if (index > -1) {
       task.isCompleted = true;
       try {
-        console.log(task);
         await api.patch(
           `/tasks/${taskId}`,
           JSON.stringify(task),
@@ -178,7 +182,7 @@ export default function UsersTasks() {
     }
     //
     console.log(myTasks);
-    myTasks = [...myTasks];
+    //myTasks = [...myTasks];
     setTasks([...myTasks]);
   };
   return (
