@@ -23,7 +23,13 @@ export default function UsersTasks() {
       const res = await api.get("/tasks", requestOptions);
       if (res.data) {
         setIsLoading(false);
-        setTasks(res.data);
+        let nonCompletedTasks = [];
+        res.data.forEach((element) => {
+          if (!element.isCompleted) {
+            nonCompletedTasks.push(element);
+          }
+        });
+        setTasks(nonCompletedTasks);
       }
     } catch (error) {
       console.log(error.response);
@@ -133,19 +139,22 @@ export default function UsersTasks() {
         nonCompletedTasks.push(element);
       }
     });
-    try {
-      await api.delete(`/tasks/${taskId}`, requestOptions);
-    } catch (error) {
-      console.log(error);
-    }
-    const task = nonCompletedTasks.find((elm) => (elm._id = taskId));
+    console.log(nonCompletedTasks);
+    const task = nonCompletedTasks.find((elm) => elm._id === taskId);
+    console.log(task);
     const index = nonCompletedTasks.indexOf(task);
     if (index > -1) {
+      console.log(index);
       nonCompletedTasks.splice(index, 1);
     }
     console.log(nonCompletedTasks); // deleted
 
     setTasks([...nonCompletedTasks]);
+    try {
+      await api.delete(`/tasks/${taskId}`, requestOptions);
+    } catch (error) {
+      console.log(error);
+    }
   };
   //
 
@@ -163,9 +172,15 @@ export default function UsersTasks() {
     console.log(tasks);
     let myTasks = [...tasks];
     console.log(myTasks);
-    const task = myTasks.find((elm) => (elm._id = taskId));
+    let nonCompletedTasks = [];
+    myTasks.forEach((element) => {
+      if (!element.isCompleted) {
+        nonCompletedTasks.push(element);
+      }
+    });
+    const task = nonCompletedTasks.find((elm) => elm._id === taskId);
     console.log(task);
-    const index = myTasks.indexOf(task);
+    const index = nonCompletedTasks.indexOf(task);
     console.log(index);
 
     if (index > -1) {
@@ -183,7 +198,7 @@ export default function UsersTasks() {
     //
     console.log(myTasks);
     //myTasks = [...myTasks];
-    setTasks([...myTasks]);
+    setTasks([...nonCompletedTasks]);
   };
   return (
     <div className="spinner-container">
