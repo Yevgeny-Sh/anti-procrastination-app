@@ -126,21 +126,27 @@ export default function UsersTasks() {
       },
     };
 
-    let myTasks = tasks;
-    if (myTasks) {
-      try {
-        await api.delete(`/tasks/${taskId}`, requestOptions);
-      } catch (error) {
-        console.log(error);
-      }
-      const task = tasks.find((elm) => (elm._id = taskId));
-      const index = myTasks.indexOf(task);
-      if (index > -1) {
-        myTasks.splice(index, 1);
-      }
-      //creates new array to force re-render
-      setTasks([...myTasks]);
+    let myTasks = [...tasks];
+    //   if (myTasks) {
+    try {
+      await api.delete(`/tasks/${taskId}`, requestOptions);
+    } catch (error) {
+      console.log(error);
     }
+    const task = tasks.find((elm) => (elm._id = taskId));
+    const index = myTasks.indexOf(task);
+    console.log(index);
+    if (index > -1) {
+      console.log("fff");
+      myTasks.splice(index, 1);
+    }
+    console.log(myTasks); //not deleted
+    //creates new array to force re-render
+    // setTasks([...myTasks]);
+    myTasks = [...myTasks];
+    setTasks([...myTasks]);
+    console.log(tasks);
+    //}
   };
   const completeTask = async (taskId) => {
     const token = JSON.parse(sessionStorage.getItem("token"));
@@ -155,7 +161,7 @@ export default function UsersTasks() {
 
     let myTasks = tasks;
     //if (myTasks) {
-    const task = tasks.find((elm) => (elm._id = taskId));
+    const task = myTasks.find((elm) => (elm._id = taskId));
     const index = myTasks.indexOf(task);
     if (index > -1) {
       task.isCompleted = true;
@@ -170,8 +176,10 @@ export default function UsersTasks() {
         console.log(error);
       }
     }
+    //
+    console.log(myTasks);
+    myTasks = [...myTasks];
     setTasks([...myTasks]);
-    // }
   };
   return (
     <div className="spinner-container">
