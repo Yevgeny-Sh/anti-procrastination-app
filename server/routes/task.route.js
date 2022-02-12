@@ -49,15 +49,9 @@ router.get("/api/tasks/:id", auth, async (req, res) => {
 
 //update a task
 router.patch("/api/tasks/:id", auth, async (req, res) => {
+  console.log(req.body);
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["description", "isCompleted"];
-  const isValidOperation = updates.every((update) =>
-    allowedUpdates.includes(update)
-  );
-
-  if (!isValidOperation) {
-    return res.status(400).send({ error: "Invalid updates!" });
-  }
+  //no check for allowed updates, all updates on form (only isCompleted) allowed
 
   try {
     const task = await Task.findOne({

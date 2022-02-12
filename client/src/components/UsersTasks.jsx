@@ -160,7 +160,12 @@ export default function UsersTasks() {
     if (index > -1) {
       task.isCompleted = true;
       try {
-        await api.patch(`/tasks/${taskId}`, {}, requestOptions);
+        console.log(task);
+        await api.patch(
+          `/tasks/${taskId}`,
+          JSON.stringify(task),
+          requestOptions
+        );
       } catch (error) {
         console.log(error);
       }
