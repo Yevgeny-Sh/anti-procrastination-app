@@ -5,7 +5,7 @@ const { Header, Content } = Layout;
 export default function HomePage() {
   return (
     <Layout>
-      <Header className="home-header" theme="dark">
+      <Header className="layout-header" theme="dark">
         no more procrastination
       </Header>
       <Content>

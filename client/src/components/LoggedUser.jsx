@@ -30,7 +30,7 @@ export default function LoggedUser(props) {
       console.log(error);
     }
   };
-  //handleDeleteAccount
+
   const handleDeleteAccount = async () => {
     const token = JSON.parse(sessionStorage.getItem("token"));
     const requestOptions = {
@@ -91,6 +91,10 @@ export default function LoggedUser(props) {
 
           <Link to="/new-tasks" className="home-link ">
             create new task{"    "}
+            <br />
+          </Link>
+          <Link to="/my-stats" className="home-link ">
+            my stats{"    "}
             <br />
           </Link>
         </Card>

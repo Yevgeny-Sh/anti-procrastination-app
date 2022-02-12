@@ -128,7 +128,11 @@ export default function UsersTasks() {
 
     let myTasks = tasks;
     if (myTasks) {
-      await api.delete(`/tasks/${taskId}`, requestOptions);
+      try {
+        await api.delete(`/tasks/${taskId}`, requestOptions);
+      } catch (error) {
+        console.log(error);
+      }
       const task = tasks.find((elm) => (elm._id = taskId));
       const index = myTasks.indexOf(task);
       if (index > -1) {
@@ -139,15 +143,30 @@ export default function UsersTasks() {
     }
   };
   const completeTask = async (taskId) => {
+    const token = JSON.parse(sessionStorage.getItem("token"));
+
+    const requestOptions = {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    };
+
     let myTasks = tasks;
-    if (myTasks) {
-      const task = tasks.find((elm) => (elm._id = taskId));
-      const index = myTasks.indexOf(task);
-      if (index > -1) {
-        task.isCompleted = true;
+    //if (myTasks) {
+    const task = tasks.find((elm) => (elm._id = taskId));
+    const index = myTasks.indexOf(task);
+    if (index > -1) {
+      task.isCompleted = true;
+      try {
+        await api.patch(`/tasks/${taskId}`, {}, requestOptions);
+      } catch (error) {
+        console.log(error);
       }
-      setTasks([...myTasks]);
     }
+    setTasks([...myTasks]);
+    // }
   };
   return (
     <div className="spinner-container">
