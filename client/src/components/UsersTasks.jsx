@@ -23,13 +23,13 @@ export default function UsersTasks() {
       const res = await api.get("/tasks", requestOptions);
       if (res.data) {
         setIsLoading(false);
-        let nonCompletedTasks = [];
-        res.data.forEach((element) => {
-          if (!element.isCompleted) {
-            nonCompletedTasks.push(element);
-          }
-        });
-        setTasks(nonCompletedTasks);
+        // let nonCompletedTasks = [];
+        // res.data.forEach((element) => {
+        //   if (!element.isCompleted) {
+        //     nonCompletedTasks.push(element);
+        //   }
+        // });
+        setTasks(res.data);
       }
     } catch (error) {
       console.log(error.response);
@@ -70,9 +70,11 @@ export default function UsersTasks() {
               </Button>
             </Card>
           );
+          return nonCompletedTasks;
         }
-        return nonCompletedTasks;
+        return null;
       });
+
       return renderedResults;
     }
   };
