@@ -9,14 +9,14 @@ import api from "../api/api";
 export default function UserLogin() {
   const history = useHistory();
 
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   //const [name, setName] = useState("");
 
   const [errorMsg, setErrorMsg] = useState("");
 
-  const onEmailChange = (event) => {
-    setEmail(event.target.value);
+  const onNameChange = (event) => {
+    setName(event.target.value);
   };
   const onPasswordChange = (event) => {
     setPassword(event.target.value);
@@ -27,7 +27,7 @@ export default function UserLogin() {
 
   const handleLogin = async () => {
     const user = {
-      email,
+      name,
       password,
     };
     try {
@@ -49,11 +49,11 @@ export default function UserLogin() {
   return (
     <Card>
       <Input
-        value={email}
+        value={name}
         className="input email-input"
         size="medium"
-        placeholder="email"
-        onChange={onEmailChange}
+        placeholder="name"
+        onChange={onNameChange}
       />
       <br></br>
       <Input.Password

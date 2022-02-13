@@ -30,7 +30,6 @@ router.delete("/api/users/me", auth, deleteUser);
 //delete all users (for testing)
 router.delete("/api/users", deleteAllUsers);
 //Updates a signed in user
-//!make sure to include auth
 router.put("/api/users/me", auth, updateUser);
 //login
 router.post("/api/users/login", loginUser);
