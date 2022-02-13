@@ -62,7 +62,7 @@ export default function LoggedUser(props) {
           className="button logout-btn"
           onClick={() => handleLogOut()}
         >
-          logout
+          Logout
         </Button>
         <Button>
           <Link to="/update" className="home-link ">
@@ -75,22 +75,30 @@ export default function LoggedUser(props) {
           className="button logout-btn"
           onClick={() => handleDeleteAccount()}
         >
-          delete account
+          Delete account
         </Button>
       </Header>
       <Content>
         {" "}
         <Card>
-          <div>hello:{props.location.state.currUser.name}</div>
+          <div>Hello:{props.location.state.currUser.name}</div>
 
           <br />
           <Link to="/tasks" className="home-link ">
-            my tasks{"    "}
+            My tasks{"    "}
             <br />
           </Link>
 
           <Link to="/new-tasks" className="home-link ">
-            create new task{"    "}
+            Create new task{"    "}
+            <br />
+          </Link>
+          <Link to="/my-completed" className="home-link ">
+            Completed tasks{"    "}
+            <br />
+          </Link>
+          <Link to="/my-procrastinated" className="home-link ">
+            Procrastinated task{"    "}
             <br />
           </Link>
           <Link to="/my-stats" className="home-link ">
