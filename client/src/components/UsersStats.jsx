@@ -92,11 +92,11 @@ export default function UsersStats() {
           most completed category:
           {popularCompletedCategory}
         </p>
-        <p>
+        {/* <p>
           {" "}
           most popular procrstination reason In completed tasks:
           {"bordom"}
-        </p>
+        </p> */}
         <p>
           {" "}
           number of work tasks completed:
@@ -187,11 +187,11 @@ export default function UsersStats() {
           most procrastinated category:
           {popularProcCategory}
         </p>
-        <p>
+        {/* <p>
           {" "}
           most popular procrstination reason:
           {"bordom"}
-        </p>
+        </p> */}
         <p>
           {" "}
           number of work tasks procrastinated:
