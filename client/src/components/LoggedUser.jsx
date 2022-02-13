@@ -52,7 +52,7 @@ export default function LoggedUser(props) {
       console.log(error);
     }
   };
-
+  console.log(props.location.state.currUser);
   return (
     <Layout>
       <Header>

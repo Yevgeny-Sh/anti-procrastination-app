@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { Layout, Button } from "antd";
 import api from "../api/api";
+const { Header, Content } = Layout;
 export default function UserUpdate() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -42,25 +44,36 @@ export default function UserUpdate() {
   };
 
   return (
-    <>
-      <div>name: {name}</div>
-      <input value={name} placeholder="name" onChange={onNameChange} />
-      <div>email: {email}</div>
-      <input value={email} placeholder="email" onChange={onEmailChange} />
-      <div>password: {password}</div>
-      <input
-        value={password}
-        placeholder="password"
-        onChange={onPasswordChange}
-      />
-      <button className="button create-btn" onClick={handleUpdate}>
-        login
-      </button>
-      {isPosted ? (
-        <div className="posted">credentials updated</div>
-      ) : (
-        <div></div>
-      )}
-    </>
+    <Layout>
+      <Header className="layout-header">Update Credentials</Header>
+      <Content>
+        {" "}
+        <>
+          <div>name: {name}</div>
+          <input value={name} placeholder="name" onChange={onNameChange} />
+          <div>email: {email}</div>
+          <input value={email} placeholder="email" onChange={onEmailChange} />
+          <div>password: {password}</div>
+          <input
+            value={password}
+            placeholder="password"
+            onChange={onPasswordChange}
+          />
+          <br />
+          <Button
+            type="primary"
+            className="button create-btn"
+            onClick={handleUpdate}
+          >
+            Update
+          </Button>
+          {isPosted ? (
+            <div className="posted">credentials updated</div>
+          ) : (
+            <div></div>
+          )}
+        </>
+      </Content>
+    </Layout>
   );
 }

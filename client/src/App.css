@@ -27,9 +27,7 @@
 .App-link {
   color: #61dafb;
 }
-.task-card {
-  background: #61dafb;
-}
+
 .input {
   width: 16vw;
 }
@@ -47,6 +45,8 @@
 .task-card {
   display: inline-flex;
   flex-direction: row;
+  background: #a6eca8;
+  border-radius: 10%;
 }
 .layout-header {
   color: white;

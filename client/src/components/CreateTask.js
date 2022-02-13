@@ -4,8 +4,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Radio, DatePicker, Button } from "antd";
+import { Layout } from "antd";
 import api from "../api/api";
-//const { RangePicker } = DatePicker;
+const { Header, Content } = Layout;
 
 export default function CreateTask() {
   const history = useHistory();
@@ -80,78 +81,87 @@ export default function CreateTask() {
     }
   };
   return (
-    <>
-      <div>description: </div>
-      <input
-        value={description}
-        placeholder="description"
-        onChange={onDescriptionChange}
-      />
-      <div>category: </div>
-      <Radio.Group onChange={onCategoryChange} value={category}>
-        <Radio value={"work"}>work</Radio>
-        <Radio value={"academic"}>academic</Radio>
-        <Radio value={"birocratic"}>birocratic</Radio>
-        <Radio value={"social"}>social</Radio>
-        <Radio value={"medical"}>medical</Radio>
-      </Radio.Group>
+    <Layout>
+      <Header className="layout-header">Create new Task</Header>
+      <Content>
+        <>
+          <div>description: </div>
+          <input
+            value={description}
+            placeholder="description"
+            onChange={onDescriptionChange}
+          />
+          <div>category: </div>
+          <Radio.Group onChange={onCategoryChange} value={category}>
+            <Radio value={"work"}>work</Radio>
+            <Radio value={"academic"}>academic</Radio>
+            <Radio value={"birocratic"}>birocratic</Radio>
+            <Radio value={"social"}>social</Radio>
+            <Radio value={"medical"}>medical</Radio>
+          </Radio.Group>
 
-      <div>importance: </div>
-      <input
-        type="range"
-        name="cowbell"
-        min="1"
-        max="10"
-        value={importance}
-        step="1"
-        onChange={onImportanceChange}
-      ></input>
+          <div>importance: </div>
+          <input
+            type="range"
+            name="cowbell"
+            min="1"
+            max="10"
+            value={importance}
+            step="1"
+            onChange={onImportanceChange}
+          ></input>
 
-      <div>urgency: </div>
-      <input
-        type="range"
-        name="cowbell"
-        min="1"
-        max="10"
-        value={urgency}
-        step="1"
-        onChange={onUrgencyChange}
-      ></input>
+          <div>urgency: </div>
+          <input
+            type="range"
+            name="cowbell"
+            min="1"
+            max="10"
+            value={urgency}
+            step="1"
+            onChange={onUrgencyChange}
+          ></input>
 
-      <div>willingness: </div>
-      <input
-        type="range"
-        name="cowbell"
-        min="1"
-        max="10"
-        value={willingness}
-        step="1"
-        onChange={onWillingnessChange}
-      ></input>
-      <br></br>
-      <DatePicker onChange={onDueDateChange} />
+          <div>willingness: </div>
+          <input
+            type="range"
+            name="cowbell"
+            min="1"
+            max="10"
+            value={willingness}
+            step="1"
+            onChange={onWillingnessChange}
+          ></input>
+          <br></br>
+          <DatePicker onChange={onDueDateChange} />
 
-      <div>reason: </div>
-      <input value={reason} placeholder="reason" onChange={onReasonChange} />
-      <br></br>
-      <Button type="primary" className="create-btn" onClick={handleCreate}>
-        create
-      </Button>
-      {errorMsg ? (
-        <div className="errorMsg">error:{errorMsg}</div>
-      ) : (
-        <div></div>
-      )}
-      {isCreated ? (
-        <div className="isCreated">
-          new task created!
-          <button className="button icon-left" onClick={history.goBack}>
-            go back
-          </button>
-        </div>
-      ) : (
-        <div></div>
-      )}
-    </>
+          <div>reason for procrastination: </div>
+          <input
+            value={reason}
+            placeholder="reason"
+            onChange={onReasonChange}
+          />
+          <br></br>
+          <Button type="primary" className="create-btn" onClick={handleCreate}>
+            create
+          </Button>
+          {errorMsg ? (
+            <div className="errorMsg">error:{errorMsg}</div>
+          ) : (
+            <div></div>
+          )}
+          {isCreated ? (
+            <div className="isCreated">
+              new task created!
+              <button className="button icon-left" onClick={history.goBack}>
+                go back
+              </button>
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </>
+      </Content>
+    </Layout>
   );
 }
