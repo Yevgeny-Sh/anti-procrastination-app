@@ -9,7 +9,7 @@ const auth = async (req, res, next) => {
     const decoded = jwt.verify(token, keys.SECRET_FOR_AUTH);
     //decoded now contains object with user _id
     //the second arg is a string called - "secret"
-    //TODO should be stored as a env variable, hidden in the config folder
+    //stored as a env variable, hidden in the config folder
     const user = await User.findOne({
       _id: decoded._id,
       "tokens.token": token,

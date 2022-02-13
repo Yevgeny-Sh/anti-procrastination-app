@@ -28,7 +28,7 @@ userSchema.virtual("tasks", {
 //add method to an Instance of a User Model
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
-  //TODO hide secret from here also
+  // hiding secret from here also
   const token = jwt.sign({ _id: user._id.toString() }, keys.SECRET_FOR_AUTH);
   user.tokens = user.tokens.concat({ token });
   await user.save();
