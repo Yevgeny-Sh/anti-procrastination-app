@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Input, Button } from "antd";
+import { useHistory } from "react-router-dom";
 
 import api from "../api/api";
 
@@ -7,6 +8,9 @@ export default function UserRegister() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isPosted, setIsPosted] = useState(false);
+
+  const history = useHistory();
 
   const onNameChange = (event) => {
     console.log(event.target.value);
@@ -29,6 +33,7 @@ export default function UserRegister() {
     };
     try {
       await api.post("/users", newItem);
+      setIsPosted(true);
     } catch (error) {
       console.log(error);
     }
@@ -64,6 +69,13 @@ export default function UserRegister() {
       >
         register new user
       </Button>
+      {isPosted ? (
+        <div>
+          <Button onClick={history.goBack}>go back</Button>
+        </div>
+      ) : (
+        <div />
+      )}
     </>
   );
 }

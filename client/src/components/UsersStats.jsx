@@ -230,7 +230,6 @@ export default function UsersStats() {
         <Layout>
           <Header className="layout-header">my stats</Header>
           <Content>
-            Content:
             <Button
               type="secondary"
               className="button "
@@ -239,9 +238,6 @@ export default function UsersStats() {
               }}
             >
               completed tasks{" "}
-            </Button>
-            <Button type="secondary" className="button " onClick={() => {}}>
-              non completed tasks{" "}
             </Button>
             <Button
               type="secondary"

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { Layout, Button } from "antd";
 import api from "../api/api";
+import { useHistory } from "react-router-dom";
+
 const { Header, Content } = Layout;
 export default function UserUpdate() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPosted, setIsPosted] = useState(false);
+
+  const history = useHistory();
 
   const onNameChange = (event) => {
     setName(event.target.value);
@@ -68,7 +72,14 @@ export default function UserUpdate() {
             Update
           </Button>
           {isPosted ? (
-            <div className="posted">credentials updated</div>
+            <div className="posted">
+              credentials updated
+              <div>
+                <Button type="primary" onClick={history.goBack}>
+                  go back
+                </Button>
+              </div>
+            </div>
           ) : (
             <div></div>
           )}
