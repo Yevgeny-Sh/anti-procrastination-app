@@ -35,21 +35,17 @@ export default function CompletedTasks() {
   }, []);
 
   useEffect(() => {
-    // if (tasks) {
     const getCompletedTasks = () => {
       let completedTasks = tasks.filter((task) => task.isCompleted);
       console.log(completedTasks);
       setCompletedTasks(completedTasks);
     };
     getCompletedTasks();
-    // }
   }, [tasks]);
 
   const renderCompletedTasks = () => {
-    //const renderTasks = (tasks) => {
     let taskToRender = "";
     const renderedResults = completedTasks.map((task) => {
-      //  if (!task.isCompleted) {
       taskToRender = (
         <Card className="task-card" key={task._id}>
           <p> description:{task.description}</p>
@@ -61,11 +57,9 @@ export default function CompletedTasks() {
           <p> task due at :{task.dueDate.slice(0, -14)}</p>
         </Card>
       );
-      //} else return null;
       return taskToRender;
     });
     return renderedResults;
-    // };
   };
 
   return <div>{loading ? <Spin size="large" /> : renderCompletedTasks()}</div>;
