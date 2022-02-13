@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Task = require("./task.model");
+const keys = require("../config/keys");
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -28,7 +29,7 @@ userSchema.virtual("tasks", {
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
   //TODO hide secret from here also
-  const token = jwt.sign({ _id: user._id.toString() }, "hello");
+  const token = jwt.sign({ _id: user._id.toString() }, keys.SECRET_FOR_AUTH);
   user.tokens = user.tokens.concat({ token });
   await user.save();
 

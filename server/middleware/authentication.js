@@ -1,11 +1,12 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
+const keys = require("../config/keys");
 
 // //!the auth tokens are sent in the header
 const auth = async (req, res, next) => {
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
-    const decoded = jwt.verify(token, "hello");
+    const decoded = jwt.verify(token, keys.SECRET_FOR_AUTH);
     //decoded now contains object with user _id
     //the second arg is a string called - "secret"
     //TODO should be stored as a env variable, hidden in the config folder

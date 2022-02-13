@@ -1,4 +1,4 @@
 module.exports = {
   MONGOOSE_PASS: "yevgeny1234",
-  secretString: "hello",
+  SECRET_FOR_AUTH: "hello",
 };
