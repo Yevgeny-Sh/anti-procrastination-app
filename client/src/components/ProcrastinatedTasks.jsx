@@ -6,10 +6,7 @@ import api from "../api/api";
 export default function ProcrastinatedTasks() {
   const [tasks, setTasks] = useState([]);
   const [procTasks, setProcTasks] = useState([]);
-
   const [loading, setIsLoading] = useState(true);
-
-  //   const [loading, setIsLoading] = useState(true);
 
   const getTasks = async () => {
     const token = JSON.parse(sessionStorage.getItem("token"));
@@ -36,20 +33,17 @@ export default function ProcrastinatedTasks() {
   }, []);
 
   useEffect(() => {
-    // if (tasks) {
-    const proc = () => {
+    const getProcTasks = () => {
       let procTasks = tasks.filter(
         (task) => Date.parse(task.dueDate) <= Date.now()
       );
       console.log(procTasks);
       setProcTasks(procTasks);
     };
-    proc();
-    // }
+    getProcTasks();
   }, [tasks]);
 
   const renderProcrastinatedTasks = () => {
-    //const renderTasks = (tasks) => {
     let procrastinatedTask = "";
     const renderedResults = procTasks.map((task) => {
       if (!task.isCompleted) {
@@ -68,7 +62,6 @@ export default function ProcrastinatedTasks() {
       return procrastinatedTask;
     });
     return renderedResults;
-    // };
   };
 
   return (
