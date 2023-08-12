@@ -8,6 +8,7 @@ const { Header, Content } = Layout;
 export default function UsersTasks() {
   const [loading, setIsLoading] = useState(true);
   const [tasks, setTasks] = useState([]);
+  const [isTaskBeingUpadated, setIsTaskBeingUpadated] = useState(false);
 
   const getTasks = async () => {
     const token = JSON.parse(sessionStorage.getItem("token"));
@@ -35,6 +36,10 @@ export default function UsersTasks() {
       console.log(error.response);
     }
   };
+  const updateTask=(taskId)=>{
+  setIsTaskBeingUpadated(true)
+  history.push('/create-task')
+  }
 
   //
   const renderTasks = (tasks) => {
@@ -67,6 +72,14 @@ export default function UsersTasks() {
                 }}
               >
                 delete task
+              </Button>
+                 <Button
+                className="button update-task-btn"
+                onClick={() => {
+                  updateTask(task._id);
+                }}
+              >
+                update task
               </Button>
             </Card>
           );
@@ -249,6 +262,7 @@ export default function UsersTasks() {
             <div>
               <div>tasks:</div> {renderTasks(tasks)}
             </div>
+
           </Content>
         </Layout>
       )}

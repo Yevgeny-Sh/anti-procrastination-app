@@ -1,5 +1,7 @@
 .app {
   text-align: center;
+    font-size: larger;
+
 }
 
 .App-logo {
@@ -66,4 +68,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.home-container{
+  height: 91vh;
 }

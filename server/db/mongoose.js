@@ -3,7 +3,7 @@ const keys = require("../config/keys");
 
 //connect to cluster
 mongoose.connect(
-  `mongodb+srv://yevgeny:${keys.MONGOOSE_PASS}@cluster0.mzerb.mongodb.net/procrastination?retryWrites=true&w=majority`,
+  `mongodb+srv://yevgeny:yevgeny1234@cluster0.mzerb.mongodb.net/procrastination?retryWrites=true&w=majority`,
 
   {
     useNewUrlParser: true,
